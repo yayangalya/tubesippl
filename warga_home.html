@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+{% block title %}Beranda Warga{% endblock %}
+
+{% block content %}
+  {% include "core/_hero.html" %}
+
+  <div class="card">
+    <div class="header">
+      <h1>Beranda Warga</h1>
+      <p>{{ request.user.nama }} • {{ request.user.nik }}</p>
+    </div>
+
+    <div class="content">
+      <div class="help">
+        Ini dashboard warga. Silakan pilih menu untuk ajukan surat atau cek status.
+      </div>
+
+      <div class="grid" style="margin-top:12px;">
+        <a class="btn" href="{% url 'ajukan_surat' %}" style="text-decoration:none;text-align:center;">Ajukan Surat</a>
+        <a class="btn" href="{% url 'status_surat' %}" style="text-decoration:none;text-align:center;">Cek Status</a>
+      </div>
+
+      <form method="post" action="{% url 'logout' %}" style="margin-top:14px;">
+        {% csrf_token %}
+        <button class="btn" type="submit">Logout</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

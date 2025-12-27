@@ -1,0 +1,56 @@
+@'
+{% extends "core/base.html" %}
+{% block title %}Status Surat{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="header">
+    <h1>Status Surat</h1>
+    <p>Riwayat pengajuan surat kamu.</p>
+  </div>
+
+  <div class="content">
+    {% if items %}
+      <div class="grid">
+        {% for x in items %}
+          <div class="item-card">
+            <div class="item-top">
+              <div>
+                <div class="item-title">{{ x.get_letter_type_display }}</div>
+                <div class="help">Diajukan: {{ x.created_at|date:"d M Y, H:i" }}</div>
+              </div>
+
+              <span class="pill
+                {% if x.status == 'DIPROSES' %}pill--process{% endif %}
+                {% if x.status == 'DISETUJUI' %}pill--ok{% endif %}
+                {% if x.status == 'TELAH_DIAMBIL' %}pill--done{% endif %}
+              ">
+                {{ x.get_status_display }}
+              </span>
+            </div>
+
+            {% if x.status == "DISETUJUI" %}
+              <div class="alert" style="margin-top:10px;">
+                Surat telah disetujui. Silahkan datang ke kantor desa untuk mengambil surat.
+                Harap membawa KTP atau KK sebagai bukti pengambilan.
+              </div>
+            {% endif %}
+
+            {% if x.status == "TELAH_DIAMBIL" %}
+              <div class="help" style="margin-top:10px;">✅ Surat sudah diambil di kantor desa.</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="help">Belum ada pengajuan.</div>
+    {% endif %}
+
+    <div class="grid" style="margin-top:12px;">
+      <a class="btn" href="{% url 'ajukan_surat' %}" style="text-decoration:none;text-align:center;">Ajukan Surat Lagi</a>
+      <a class="btn" href="{% url 'warga_home' %}" style="text-decoration:none;text-align:center;">Kembali</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+'@ | Set-Content -Encoding UTF8 core\templates\core\status_surat.html

@@ -1,0 +1,50 @@
+{% extends "core/base.html" %}
+{% block title %}Daftar Warga{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="header">
+    <h1>Daftar Warga</h1>
+    <p>Isi data sesuai KTP.</p>
+  </div>
+
+  <div class="content">
+    {% if blocked %}
+      <div class="alert">
+        Kamu sedang login. Untuk mendaftar akun baru, silahkan logout dulu.
+      </div>
+
+      <form method="post" action="{% url 'logout' %}" style="margin-top:12px;">
+        {% csrf_token %}
+        <button class="btn" type="submit">Logout</button>
+      </form>
+
+      <div style="margin-top:10px;">
+        <a class="btn" href="{% url 'warga_home' %}" style="text-decoration:none;text-align:center;">Kembali</a>
+      </div>
+
+    {% else %}
+      <form method="post" action="{% url 'daftar_warga' %}" class="grid" novalidate>
+        {% csrf_token %}
+
+        {% for field in form %}
+          <div>
+            <label class="label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+              <div class="alert">{{ field.errors|striptags }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+
+        <button class="btn" type="submit">Daftar</button>
+        <a class="btn" href="{% url 'login_warga' %}" style="text-decoration:none;text-align:center;">Kembali ke Login</a>
+
+        <div class="help">
+          Setelah daftar berhasil, kamu akan kembali ke halaman login.
+        </div>
+      </form>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

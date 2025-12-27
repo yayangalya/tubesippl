@@ -1,0 +1,22 @@
+@'
+{% extends "core/base.html" %}
+{% block title %}Pengajuan Berhasil{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="header">
+    <h1>Pengajuan Berhasil</h1>
+    <p>{{ lr.get_letter_type_display }}</p>
+  </div>
+
+  <div class="content">
+    <div class="help">✅ Pengajuan anda berhasil, silahkan cek status surat.</div>
+
+    <div class="grid" style="margin-top:12px;">
+      <a class="btn" href="{% url 'status_surat' %}" style="text-decoration:none;text-align:center;">Status Surat</a>
+      <a class="btn" href="{% url 'warga_home' %}" style="text-decoration:none;text-align:center;">Kembali</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+'@ | Set-Content -Encoding UTF8 core\templates\core\berhasil.html

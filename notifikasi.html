@@ -1,0 +1,34 @@
+@'
+{% extends "core/base.html" %}
+{% block title %}Notifikasi{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="header">
+    <h1>Notifikasi</h1>
+    <p>Pemberitahuan terkait surat kamu.</p>
+  </div>
+
+  <div class="content">
+    {% if not items %}
+      <div class="help">Belum ada notifikasi.</div>
+    {% else %}
+      <div class="grid">
+        {% for n in items %}
+          <div class="card" style="border-radius:14px;">
+            <div class="content">
+              <b>{{ n.title }}</b>
+              <div class="help">{{ n.message }}</div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div style="margin-top:12px;">
+      <a class="btn" href="{% url 'warga_home' %}" style="text-decoration:none;text-align:center;">Kembali</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+'@ | Set-Content -Encoding UTF8 core\templates\core\notifikasi.html

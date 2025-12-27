@@ -1,0 +1,32 @@
+@'
+{% extends "core/base.html" %}
+{% block title %}Verifikasi Pengajuan{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="header">
+    <h1>Verifikasi Pengajuan</h1>
+    <p>Pastikan data benar sebelum dikirim.</p>
+  </div>
+
+  <div class="content">
+    <form method="post" class="grid" novalidate>
+      {% csrf_token %}
+
+      {% for field in form %}
+        <div>
+          <label class="label">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <div class="alert">{{ field.errors|striptags }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+
+      <button class="btn" type="submit">Kirim Pengajuan</button>
+      <a class="btn" href="{% url 'ajukan_surat' %}" style="text-decoration:none;text-align:center;">Batal</a>
+    </form>
+  </div>
+</div>
+{% endblock %}
+'@ | Set-Content -Encoding UTF8 core\templates\core\verifikasi.html

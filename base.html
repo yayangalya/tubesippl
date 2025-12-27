@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Satu Pintu Desa{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'core/styles.css' %}">
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="{% url 'warga_home' %}">
+        <img class="brand-logo" src="{% static 'core/logo.png' %}" alt="Logo Desa">
+        <div class="brand-text">
+          <div class="brand-title">Satu Pintu Desa</div>
+          <div class="brand-subtitle">Layanan surat menyurat</div>
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

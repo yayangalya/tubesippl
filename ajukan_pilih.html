@@ -1,0 +1,25 @@
+@'
+{% extends "core/base.html" %}
+{% block title %}Ajukan Surat{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="header">
+    <h1>Ajukan Surat</h1>
+    <p>Pilih jenis surat yang ingin diajukan.</p>
+  </div>
+
+  <div class="content">
+    <form method="post" class="grid">
+      {% csrf_token %}
+      <button class="btn" name="letter_type" value="{{ types.SKTM }}">Surat Keterangan Tidak Mampu</button>
+      <button class="btn" name="letter_type" value="{{ types.DOMISILI }}">Surat Keterangan Domisili</button>
+      <button class="btn" name="letter_type" value="{{ types.BELUM_MENIKAH }}">Surat Keterangan Belum Menikah</button>
+      <button class="btn" name="letter_type" value="{{ types.SKCK }}">Surat Pengantar SKCK</button>
+
+      <a class="btn" href="{% url 'warga_home' %}" style="text-decoration:none;text-align:center;">Kembali</a>
+    </form>
+  </div>
+</div>
+{% endblock %}
+'@ | Set-Content -Encoding UTF8 core\templates\core\ajukan_pilih.html

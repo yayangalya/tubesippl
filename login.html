@@ -1,0 +1,40 @@
+{% extends "core/base.html" %}
+{% block title %}Login Warga{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="header">
+    <h1>Login Warga</h1>
+    <p>Web responsif (mobile-first) untuk HP dan desktop.</p>
+  </div>
+
+  <div class="content">
+    {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+
+    <form method="post" class="grid" novalidate>
+      {% csrf_token %}
+
+      <div>
+        <label class="label" for="nik">NIK (16 digit)</label>
+        <input class="input" id="nik" name="nik" inputmode="numeric" pattern="\d*" maxlength="16" required>
+      </div>
+
+      <div>
+        <label class="label" for="password">Kata sandi</label>
+        <input class="input" id="password" name="password" type="password" required>
+      </div>
+
+      <button class="btn" type="submit">Masuk</button>
+
+      <!-- tombol daftar -->
+      <a class="btn" href="{% url 'daftar_warga' %}" style="text-decoration:none;text-align:center;">
+        Daftar Akun
+      </a>
+
+      <div class="help">
+        Belum punya akun? Daftar dulu. Jika lupa kata sandi, hubungi petugas kantor desa.
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

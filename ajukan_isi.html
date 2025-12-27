@@ -1,0 +1,39 @@
+@'
+{% extends "core/base.html" %}
+{% block title %}Isi Data Surat{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="header">
+    <h1>Isi Data Surat</h1>
+    <p>*Isi sesuai dengan KTP</p>
+  </div>
+
+  <div class="content">
+    <div class="help" style="margin-bottom:10px;">
+      Jenis surat: <b>{{ letter_label }}</b>
+    </div>
+
+    <form method="post" class="grid" novalidate>
+      {% csrf_token %}
+
+      {% for field in form %}
+        <div>
+          <label class="label">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}
+            <div class="help">{{ field.help_text }}</div>
+          {% endif %}
+          {% if field.errors %}
+            <div class="alert">{{ field.errors|striptags }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+
+      <button class="btn" type="submit">Lanjut Verifikasi</button>
+      <a class="btn" href="{% url 'ajukan_surat' %}" style="text-decoration:none;text-align:center;">Kembali</a>
+    </form>
+  </div>
+</div>
+{% endblock %}
+'@ | Set-Content -Encoding UTF8 core\templates\core\ajukan_isi.html
